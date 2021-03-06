@@ -4,11 +4,17 @@
       <div class="logo-wp">
         <img
           class="w-100 h-100"
-          src="../../assets/images/logo.png"
+          src="../../assets/images/concrete-logo.png"
           alt="logo"
         />
       </div>
-      <h3>user</h3>
+      <div class="user-wp">
+        <img
+          class="w-100 h-100"
+          src="../../assets/images/profile-user.png"
+          alt="logo"
+        />
+      </div>
     </div>
   </header>
 </template>

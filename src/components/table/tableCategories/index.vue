@@ -13,14 +13,39 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(item, index) in categories" :key="index">
+        <tr v-for="(item, index) in getListOrder" :key="index">
           <td>{{ item.key }}</td>
           <td>{{ item.name }}</td>
-          <td>show</td>
+          <td>
+            <div v-if="item.status">
+              <img src="../../../assets/images/check.png" />
+            </div>
+            <div v-else>
+              <img src="../../../assets/images/close.png" />
+            </div>
+          </td>
           <td>{{ item.order }}</td>
-          <td>edit</td>
-          <td>delete</td>
-          <td>choose</td>
+          <td>
+            <div>
+              <img src="../../../assets/images/edit.png" />
+            </div>
+          </td>
+          <td>
+            <div v-on:click="delCategories(item.id)">
+              <img src="../../../assets/images/delete.png" />
+            </div>
+          </td>
+          <td>
+            <b-form-checkbox
+              v-model="selected"
+              :key="index"
+              :value="item.id"
+              :aria-describedby="ariaDescribedby"
+              name="flavour-4a"
+              inline
+            >
+            </b-form-checkbox>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -30,9 +55,22 @@
 <script>
 export default {
   name: 'TableCategories',
+  data() {
+    return {
+      selected: []
+    }
+  },
   computed: {
     categories() {
       return this.$store.state.categories
+    },
+    getListOrder() {
+      return this.$store.getters.getListOrder
+    }
+  },
+  methods: {
+    delCategories(id) {
+      this.$store.commit('delCategories', id)
     }
   }
 }
