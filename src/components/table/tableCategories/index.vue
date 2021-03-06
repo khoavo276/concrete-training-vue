@@ -31,7 +31,7 @@
             </div>
           </td>
           <td>
-            <div v-on:click="delCategories(item.id)">
+            <div v-on:click="delCategories(item.order)">
               <img src="../../../assets/images/delete.png" />
             </div>
           </td>
@@ -39,7 +39,7 @@
             <b-form-checkbox
               v-model="selected"
               :key="index"
-              :value="item.id"
+              :value="item.order"
               :aria-describedby="ariaDescribedby"
               name="flavour-4a"
               inline
@@ -69,8 +69,8 @@ export default {
     }
   },
   methods: {
-    delCategories(id) {
-      this.$store.commit('delCategories', id)
+    delCategories(order) {
+      this.$store.commit('delCategories', order)
     }
   }
 }

@@ -78,42 +78,20 @@ export default {
   },
   methods: {
     addCategories() {
-      console.log('this.getLastId : ', this.getLastId)
-      if (this.getAllCategories.length > 0) {
-        this.$store.commit('addCategories', {
-          id: this.getLastId + 1,
-          key: this.params.key,
-          name: this.params.name,
-          order: Number(this.params.order),
-          status: this.params.status
-        })
-        this.params.key = null
-        this.params.name = null
-        this.params.order = null
-        this.params.status = null
-        this.$bvModal.hide('modal-1')
-      } else {
-        this.$store.commit('addCategories', {
-          id: 1,
-          key: this.params.key,
-          name: this.params.name,
-          order: this.params.order,
-          status: this.params.status
-        })
-        this.params.key = null
-        this.params.name = null
-        this.params.order = null
-        this.params.status = null
-        this.$bvModal.hide('modal-1')
-      }
-
-      console.log('this.getAllCategories: ', this.getAllCategories)
+      this.$store.commit('addCategories', {
+        key: this.params.key,
+        name: this.params.name,
+        order: Number(this.params.order),
+        status: this.params.status
+      })
+      this.params.key = null
+      this.params.name = null
+      this.params.order = null
+      this.params.status = null
+      this.$bvModal.hide('modal-1')
     }
   },
   computed: {
-    getLastId() {
-      return this.$store.getters.getLastId
-    },
     getAllCategories() {
       return this.$store.state.categories
     }
