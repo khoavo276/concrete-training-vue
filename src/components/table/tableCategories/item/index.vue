@@ -4,21 +4,21 @@
     <td>{{ item.name }}</td>
     <td>
       <div v-if="item.status">
-        <img src="../../../assets/images/check.png" />
+        <img src="../../../../assets/images/check.png" />
       </div>
       <div v-else>
-        <img src="../../../assets/images/close.png" />
+        <img src="../../../../assets/images/close.png" />
       </div>
     </td>
     <td>{{ item.order }}</td>
     <td>
-      <div>
-        <img src="../../../assets/images/edit.png" />
+      <div v-b-modal.modal-edit v-on:click="editCategorise(item.id)">
+        <img src="../../../../assets/images/edit.png" />
       </div>
     </td>
     <td>
       <div v-on:click="delCategories(item.id)">
-        <img src="../../../assets/images/delete.png" />
+        <img src="../../../../assets/images/delete.png" />
       </div>
     </td>
     <td>
@@ -42,6 +42,9 @@ export default {
   methods: {
     delCategories(id) {
       this.$store.commit('delCategories', id)
+    },
+    editCategorise(id) {
+      this.$store.commit('selectCategories', id)
     }
   },
   computed: {}

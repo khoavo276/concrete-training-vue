@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import Item from '@/components/modal/item/index.vue'
+import Item from '@/components/table/tableCategories/item/index.vue'
 
 export default {
   name: 'TableCategories',

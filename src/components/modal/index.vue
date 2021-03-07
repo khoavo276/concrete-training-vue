@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-modal id="modal-1" title="Add New Categories">
+    <b-modal :id="type" :title="title">
       <b-form-group
         id="fieldset-key"
         label-cols-sm="4"
@@ -72,9 +72,16 @@
       </b-form-group>
 
       <template #modal-footer>
-        <b-button size="sm" variant="success" @click="addCategories">
-          ADD
-        </b-button>
+        <div v-if="type === 'modal-add'">
+          <b-button size="sm" variant="success" @click="addCategories">
+            ADD
+          </b-button>
+        </div>
+        <div v-else>
+          <b-button size="sm" variant="success" @click="addCategories">
+            SAVE
+          </b-button>
+        </div>
       </template>
     </b-modal>
   </div>
@@ -83,6 +90,10 @@
 <script>
 export default {
   name: 'ModalAdd',
+  props: {
+    title: String,
+    type: String
+  },
   data() {
     return {
       options: [
@@ -113,7 +124,7 @@ export default {
           this.params.name = ''
           this.params.order = ''
           this.params.status = null
-          this.$bvModal.hide('modal-1')
+          this.$bvModal.hide(this.type)
         } else {
           this.$store.commit('addCategories', {
             id: 0,
@@ -126,7 +137,7 @@ export default {
           this.params.name = ''
           this.params.order = ''
           this.params.status = null
-          this.$bvModal.hide('modal-1')
+          this.$bvModal.hide(this.type)
         }
       }
     }
@@ -145,7 +156,6 @@ export default {
       return this.params.name.length > 0
     },
     validationOrder() {
-      // return this.params.order.length > 0
       return !isNaN(this.params.order) && this.params.order.length > 0
     },
     validation() {

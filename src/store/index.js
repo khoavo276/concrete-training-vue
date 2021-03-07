@@ -10,7 +10,9 @@ export default new Vuex.Store({
       { id: 1, key: 'defi', name: 'Defi', status: false, order: 6 },
       { id: 2, key: 'khoa', name: 'Khoa', status: false, order: 10 },
       { id: 3, key: 'thinh', name: 'Thinh', status: true, order: 9 }
-    ]
+    ],
+    selectId: '',
+    selectItem: {}
   },
   getters: {
     getLastId: state => {
@@ -27,6 +29,13 @@ export default new Vuex.Store({
     },
     delCategories(state, id) {
       state.categories = state.categories.filter(item => item.id != id)
+    },
+    selectCategories(state, id) {
+      state.selectId = id
+      let list = [...state.categories]
+      state.selectItem = list.filter(item => item.id == id)
+      console.log('state.select id: ', state.selectId)
+      console.log('state.select item: ', state.selectItem)
     }
   },
   actions: {},
