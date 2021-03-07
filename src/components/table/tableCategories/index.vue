@@ -13,46 +13,19 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(item, index) in getListOrder" :key="index">
-          <td>{{ item.key }}</td>
-          <td>{{ item.name }}</td>
-          <td>
-            <div v-if="item.status">
-              <img src="../../../assets/images/check.png" />
-            </div>
-            <div v-else>
-              <img src="../../../assets/images/close.png" />
-            </div>
-          </td>
-          <td>{{ item.order }}</td>
-          <td>
-            <div>
-              <img src="../../../assets/images/edit.png" />
-            </div>
-          </td>
-          <td>
-            <div v-on:click="delCategories(item.order)">
-              <img src="../../../assets/images/delete.png" />
-            </div>
-          </td>
-          <td>
-            <b-form-checkbox
-              v-model="selected"
-              :key="index"
-              :value="item.order"
-              :aria-describedby="ariaDescribedby"
-              name="flavour-4a"
-              inline
-            >
-            </b-form-checkbox>
-          </td>
-        </tr>
+        <Item
+          v-for="(item, index) in getListOrder"
+          :key="index"
+          v-bind:item="item"
+        />
       </tbody>
     </table>
   </div>
 </template>
 
 <script>
+import Item from '@/components/modal/item/index.vue'
+
 export default {
   name: 'TableCategories',
   data() {
@@ -60,12 +33,16 @@ export default {
       selected: []
     }
   },
+  components: {
+    Item
+  },
   computed: {
     categories() {
       return this.$store.state.categories
     },
     getListOrder() {
-      return this.$store.getters.getListOrder
+      let list = [...this.$store.state.categories]
+      return list.sort((a, b) => a.order - b.order)
     }
   },
   methods: {

@@ -6,33 +6,27 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     categories: [
-      { key: 'games', name: 'Games', status: true, order: 20 },
-      { key: 'defi', name: 'Defi', status: false, order: 6 },
-      { key: 'khoa', name: 'Khoa', status: false, order: 10 },
-      { key: 'thinh', name: 'Thinh', status: true, order: 9 }
+      { id: 0, key: 'games', name: 'Games', status: true, order: 20 },
+      { id: 1, key: 'defi', name: 'Defi', status: false, order: 6 },
+      { id: 2, key: 'khoa', name: 'Khoa', status: false, order: 10 },
+      { id: 3, key: 'thinh', name: 'Thinh', status: true, order: 9 }
     ]
   },
   getters: {
     getLastId: state => {
       return state.categories[state.categories.length - 1].id
     },
-    getListOrder: state => {
-      function compare(a, b) {
-        if (a.order < b.order) return -1
-        if (a.order > b.order) return 1
-        return 0
-      }
-      let listSort = []
-      listSort = state.categories
-      return listSort.sort(compare)
+    getItemByOrder: state => order => {
+      console.log('ordet: ', order)
+      return state.categories.find(item => item.order === order)
     }
   },
   mutations: {
     addCategories(state, item) {
       state.categories.push(item)
     },
-    delCategories(state, order) {
-      state.categories = state.categories.filter(item => item.order != order)
+    delCategories(state, id) {
+      state.categories = state.categories.filter(item => item.id != id)
     }
   },
   actions: {},
