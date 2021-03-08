@@ -39,11 +39,6 @@ export default {
   props: {
     item: Object
   },
-  data() {
-    return {
-      //   selected: []
-    }
-  },
   methods: {
     delCategories(id) {
       this.$store.commit('delCategories', id)
@@ -55,7 +50,3 @@ export default {
   computed: {}
 }
 </script>
-
-<style lang="scss">
-// @import './style.scss';
-</style>

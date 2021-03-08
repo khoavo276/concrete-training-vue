@@ -23,7 +23,6 @@ export default new Vuex.Store({
       if (state.categories.find(item => item.order === order)) {
         return true
       } else return false
-      // return state.categories.find(item => item.order === order)
     }
   },
   mutations: {
@@ -45,7 +44,6 @@ export default new Vuex.Store({
       state.categories = list
     },
     delListCategories(state) {
-      console.log('state: ', state.selected)
       if (state.selected.length > 0) {
         state.selected.map(item => {
           state.categories = state.categories.filter(i => i.id != item)
