@@ -1,11 +1,18 @@
 <template>
-  <div class="slider-left">
-    <ul>
-      <li>menu 1</li>
-      <li>menu 2</li>
-      <li>menu 3</li>
-      <li>menu 4</li>
-      <li>menu 5</li>
+  <div class="slider-left mt-5">
+    <ul class="p-4">
+      <li>
+        <button class="btn w-100 mb-3 py-3">User</button>
+      </li>
+      <li>
+        <button class="btn w-100 mb-3 py-3">Collectibles</button>
+      </li>
+      <li>
+        <button class="btn w-100 btn-active mb-3 py-3">Categories</button>
+      </li>
+      <li>
+        <button class="btn w-100 py-3">Configurations</button>
+      </li>
     </ul>
   </div>
 </template>

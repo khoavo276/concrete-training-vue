@@ -17,7 +17,7 @@
       </div>
     </td>
     <td>
-      <div v-on:click="delCategories(item.id)">
+      <div class="btn-del" v-on:click="delCategories(item.id)">
         <img src="../../../../assets/images/delete.png" />
       </div>
     </td>

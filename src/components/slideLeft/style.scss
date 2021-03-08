@@ -1,4 +1,13 @@
 .slider-left {
   min-width: 300px;
-  height: calc(100vh - 30px);
+  height: 100%;
+
+  ul {
+    list-style: none;
+  }
+
+  .btn-active {
+    background-color: #55642c;
+    color: white;
+  }
 }

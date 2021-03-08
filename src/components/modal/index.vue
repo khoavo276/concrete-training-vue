@@ -15,9 +15,9 @@
           v-model="params.key"
           :state="validationKey"
         ></b-form-input>
-        <b-form-invalid-feedback :state="validationKey">
+        <!-- <b-form-invalid-feedback :state="validationKey">
           Please input key
-        </b-form-invalid-feedback>
+        </b-form-invalid-feedback> -->
       </b-form-group>
       <b-form-group
         id="fieldset-name"
@@ -33,9 +33,9 @@
           v-model="params.name"
           :state="validationName"
         ></b-form-input>
-        <b-form-invalid-feedback :state="validationName">
+        <!-- <b-form-invalid-feedback :state="validationName">
           Please input name
-        </b-form-invalid-feedback>
+        </b-form-invalid-feedback> -->
       </b-form-group>
       <b-form-group
         id="fieldset-status"
@@ -66,9 +66,9 @@
           v-model="params.order"
           :state="validationOrder"
         ></b-form-input>
-        <b-form-invalid-feedback :state="validationOrder">
+        <!-- <b-form-invalid-feedback :state="validationOrder">
           Please input order, order is number
-        </b-form-invalid-feedback>
+        </b-form-invalid-feedback> -->
       </b-form-group>
 
       <template #modal-footer>
@@ -78,7 +78,7 @@
           </b-button>
         </div>
         <div v-else>
-          <b-button size="sm" variant="success" @click="addCategories">
+          <b-button size="sm" variant="success" @click="editCategories">
             SAVE
           </b-button>
         </div>
@@ -92,7 +92,8 @@ export default {
   name: 'ModalAdd',
   props: {
     title: String,
-    type: String
+    type: String,
+    data: Array
   },
   data() {
     return {
@@ -101,17 +102,30 @@ export default {
         { value: false, text: 'Disable' }
       ],
       params: {
+        id: '',
         key: '',
         name: '',
         order: '',
-        status: null
+        status: true
+      }
+    }
+  },
+  watch: {
+    data: {
+      handler(val) {
+        if (this.type === 'modal-edit') {
+          this.params.id = val[0].id
+          this.params.key = val[0].key
+          this.params.name = val[0].name
+          this.params.order = String(val[0].order)
+          this.params.status = val[0].status
+        }
       }
     }
   },
   methods: {
     addCategories() {
       if (this.validation) {
-        console.log('Number(this.params.order): ', Number(this.params.order))
         if (this.getAllCategories.length > 0) {
           this.$store.commit('addCategories', {
             id: this.getLastId + 1,
@@ -139,6 +153,18 @@ export default {
           this.params.status = null
           this.$bvModal.hide(this.type)
         }
+      }
+    },
+    editCategories() {
+      if (this.validation) {
+        this.$store.commit('editCategories', {
+          id: this.params.id,
+          key: this.params.key,
+          name: this.params.name,
+          order: Number(this.params.order),
+          status: this.params.status
+        })
+        this.$bvModal.hide(this.type)
       }
     }
   },

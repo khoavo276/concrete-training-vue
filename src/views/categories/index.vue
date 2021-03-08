@@ -2,7 +2,7 @@
   <LayoutDefault>
     <div class="categories">
       <MainHeader />
-      <div class="p-5">
+      <div class="categories-content p-4 mx-5">
         <Table />
       </div>
     </div>
@@ -23,3 +23,7 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+@import './style.scss';
+</style>

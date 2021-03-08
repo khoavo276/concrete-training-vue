@@ -12,14 +12,13 @@ export default new Vuex.Store({
       { id: 3, key: 'thinh', name: 'Thinh', status: true, order: 9 }
     ],
     selectId: '',
-    selectItem: {}
+    selectItem: []
   },
   getters: {
     getLastId: state => {
       return state.categories[state.categories.length - 1].id
     },
     getItemByOrder: state => order => {
-      console.log('ordet: ', order)
       return state.categories.find(item => item.order === order)
     }
   },
@@ -34,8 +33,12 @@ export default new Vuex.Store({
       state.selectId = id
       let list = [...state.categories]
       state.selectItem = list.filter(item => item.id == id)
-      console.log('state.select id: ', state.selectId)
-      console.log('state.select item: ', state.selectItem)
+    },
+    editCategories(state, item) {
+      let list = [...state.categories]
+      let index = list.findIndex(x => x.id === item.id)
+      list[index] = item
+      state.categories = list
     }
   },
   actions: {},
