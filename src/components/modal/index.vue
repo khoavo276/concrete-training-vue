@@ -66,9 +66,9 @@
           v-model="params.order"
           :state="validationOrder"
         ></b-form-input>
-        <!-- <b-form-invalid-feedback :state="validationOrderId">
-          Please input order, order is number
-        </b-form-invalid-feedback> -->
+        <b-form-invalid-feedback :state="validationOrder">
+          Order field is required
+        </b-form-invalid-feedback>
       </b-form-group>
 
       <template #modal-footer>
@@ -107,7 +107,8 @@ export default {
         name: '',
         order: '',
         status: true
-      }
+      },
+      oldOrder: ''
     }
   },
   watch: {
@@ -119,6 +120,7 @@ export default {
           this.params.name = val[0].name
           this.params.order = String(val[0].order)
           this.params.status = val[0].status
+          this.oldOrder = String(val[0].order)
         }
       }
     }
@@ -166,6 +168,9 @@ export default {
         })
         this.$bvModal.hide(this.type)
       }
+    },
+    checkOrder() {
+      return !this.$store.getters.getItemByOrder(Number(this.params.order))
     }
   },
   computed: {
@@ -182,18 +187,26 @@ export default {
       return this.params.name.length > 0
     },
     validationOrder() {
-      return !isNaN(this.params.order) && this.params.order.length > 0
+      if (this.type === 'modal-add') {
+        return (
+          !isNaN(this.params.order) &&
+          this.params.order.length > 0 &&
+          !this.$store.getters.getItemByOrder(Number(this.params.order))
+        )
+      } else {
+        if (this.oldOrder == Number(this.params.order)) {
+          return !isNaN(this.params.order) && this.params.order.length > 0
+        } else
+          return (
+            !isNaN(this.params.order) &&
+            this.params.order.length > 0 &&
+            !this.$store.getters.getItemByOrder(Number(this.params.order))
+          )
+      }
     },
     validation() {
       return this.validationKey && this.validationName && this.validationOrder
     }
-    // validationOrderId() {
-    //   if (
-    //     this.$store.getters.getItemByOrder(Number(this.params.order)).length
-    //   ) {
-    //     return true
-    //   } else return false
-    // }
   }
 }
 </script>

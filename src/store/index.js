@@ -20,11 +20,10 @@ export default new Vuex.Store({
       return state.categories[state.categories.length - 1].id
     },
     getItemByOrder: state => order => {
-      console.log(
-        'checkorder: ',
-        state.categories.find(item => item.order === order)
-      )
-      return state.categories.find(item => item.order === order)
+      if (state.categories.find(item => item.order === order)) {
+        return true
+      } else return false
+      // return state.categories.find(item => item.order === order)
     }
   },
   mutations: {

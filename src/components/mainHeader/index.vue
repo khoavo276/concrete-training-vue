@@ -33,7 +33,6 @@ export default {
   },
   methods: {
     deleteListCategories() {
-      console.log('list: ', this.$store.state.selected)
       this.$store.commit('delListCategories')
     }
   }
