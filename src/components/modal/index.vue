@@ -139,7 +139,7 @@ export default {
           this.params.key = ''
           this.params.name = ''
           this.params.order = ''
-          this.params.status = null
+          this.params.status = true
           this.$bvModal.hide(this.type)
         } else {
           this.$store.commit('addCategories', {
@@ -152,7 +152,7 @@ export default {
           this.params.key = ''
           this.params.name = ''
           this.params.order = ''
-          this.params.status = null
+          this.params.status = true
           this.$bvModal.hide(this.type)
         }
       }
