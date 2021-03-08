@@ -66,7 +66,7 @@
           v-model="params.order"
           :state="validationOrder"
         ></b-form-input>
-        <!-- <b-form-invalid-feedback :state="validationOrder">
+        <!-- <b-form-invalid-feedback :state="validationOrderId">
           Please input order, order is number
         </b-form-invalid-feedback> -->
       </b-form-group>
@@ -187,6 +187,13 @@ export default {
     validation() {
       return this.validationKey && this.validationName && this.validationOrder
     }
+    // validationOrderId() {
+    //   if (
+    //     this.$store.getters.getItemByOrder(Number(this.params.order)).length
+    //   ) {
+    //     return true
+    //   } else return false
+    // }
   }
 }
 </script>

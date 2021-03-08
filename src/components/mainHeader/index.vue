@@ -4,7 +4,9 @@
       <h4 class="title">Categories</h4>
       <div class="mainHeader-left">
         <button v-b-modal.modal-add class="btn-add">Add</button>
-        <button class="ml-3 btn-delete">Delete</button>
+        <button class="ml-3 btn-delete" @click="deleteListCategories">
+          Delete
+        </button>
         <ModalAdd :title="'Add New Categories'" :type="'modal-add'" />
         <ModalAdd
           :title="'Edit Categories'"
@@ -27,6 +29,12 @@ export default {
   computed: {
     selectItem() {
       return this.$store.state.selectItem
+    }
+  },
+  methods: {
+    deleteListCategories() {
+      console.log('list: ', this.$store.state.selected)
+      this.$store.commit('delListCategories')
     }
   }
 }

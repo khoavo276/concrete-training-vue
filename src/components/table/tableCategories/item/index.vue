@@ -22,7 +22,12 @@
       </div>
     </td>
     <td>
-      <b-form-checkbox :key="item.id" :value="item.id" inline>
+      <b-form-checkbox
+        :key="item.id"
+        :value="item.id"
+        inline
+        v-model="$store.state.selected"
+      >
       </b-form-checkbox>
     </td>
   </tr>
